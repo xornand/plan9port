@@ -1,0 +1,86 @@
+<$PLAN9/src/mkhdr
+
+LIBOFILES=\
+	arena.$O\
+	arenas.$O\
+	bloom.$O\
+	buildbuck.$O\
+	clump.$O\
+	config.$O\
+	conv.$O\
+	dcache.$O\
+	disksched.$O\
+	dump.$O\
+	graph.$O\
+	hdisk.$O\
+	httpd.$O\
+	icache.$O\
+	icachewrite.$O\
+	ifile.$O\
+	index.$O\
+	lump.$O\
+	lumpcache.$O\
+	lumpqueue.$O\
+	part.$O\
+	png.$O\
+	round.$O\
+	score.$O\
+	sortientry.$O\
+	stats.$O\
+	syncarena.$O\
+	syncindex0.$O\
+	trace.$O\
+	unwhack.$O\
+	utils.$O\
+	unittoull.$O\
+	whack.$O\
+	xml.$O\
+	zblock.$O\
+	zeropart.$O\
+
+SLIB=libvs.a
+
+LIB=$SLIB $LIBDIR/libventi.a
+
+HFILES=	dat.h\
+	fns.h\
+	stdinc.h\
+
+TARG=\
+	venti\
+	buildindex\
+	checkarenas\
+	checkindex\
+	clumpstats\
+	findscore\
+	fixarenas\
+	fmtarenas\
+	fmtbloom\
+	fmtindex\
+	fmtisect\
+	mirrorarenas\
+	printarena\
+	rdarena\
+	syncindex\
+	verifyarena\
+	wrarena\
+
+OFILES=
+
+BIN=$BIN/venti
+
+it:V: $O.venti
+
+CLEANFILES=$CLEANFILES $SLIB
+
+<$PLAN9/src/mkmany
+
+$SLIB: $LIBOFILES
+	ar rvc $SLIB $LIBOFILES
+
+# xml.c:D:	mkxml dat.h
+# 	./mkxml dat.h > xml.c
+
+acid:D: lumpcache.acid
+	cat $prereq >$target
+
