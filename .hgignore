@@ -1,0 +1,8 @@
+(^|/)CVS($|/)
+(^|/)\.hg($|/)
+(^|/)\.hgtags($|/)
+^plan9.log$
+^plan9-reverse.log$
+^state$
+^state.old$
+^state.journal$

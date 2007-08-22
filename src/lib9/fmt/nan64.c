@@ -1,0 +1,71 @@
+/*
+ * 64-bit IEEE not-a-number routines.
+ * This is big/little-endian portable assuming that 
+ * the 64-bit doubles and 64-bit integers have the
+ * same byte ordering.
+ */
+
+#include "plan9.h"
+#include "fmt.h"
+#include "fmtdef.h"
+
+static uvlong uvnan    = ((uvlong)0x7FF00000<<32)|0x00000001;
+static uvlong uvinf    = ((uvlong)0x7FF00000<<32)|0x00000000;
+static uvlong uvneginf = ((uvlong)0xFFF00000<<32)|0x00000000;
+
+double
+__NaN(void)
+{
+	uvlong *p;
+
+	/* gcc complains about "return *(double*)&uvnan;" */
+	p = &uvnan;
+	return *(double*)p;
+}
+
+int
+__isNaN(double d)
+{
+	/*
+	 * Used to just say x = *(uvlong*)&d,
+	 * but gcc miscompiles that!
+	 */
+	union {
+		uvlong i;
+		double f;
+	} u;
+	uvlong x;
+	
+	u.f = d;
+	x = u.i;
+	/* IEEE 754: exponent bits 0x7FF and non-zero mantissa */
+	return (x&uvinf) == uvinf && (x&~uvneginf) != 0;
+}
+
+double
+__Inf(int sign)
+{
+	uvlong *p;
+
+	if(sign < 0)
+		p = &uvinf;
+	else
+		p = &uvneginf;
+	return *(double*)p;
+}
+
+int
+__isInf(double d, int sign)
+{
+	uvlong x;
+	double *p;
+
+	p = &d;
+	x = *(uvlong*)p;
+	if(sign == 0)
+		return x==uvinf || x==uvneginf;
+	else if(sign > 0)
+		return x==uvinf;
+	else
+		return x==uvneginf;
+}

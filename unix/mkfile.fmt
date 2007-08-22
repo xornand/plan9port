@@ -1,0 +1,21 @@
+MAKEALL=`{cd ../make; ls Make.*}
+TARG=\
+	$MAKEALL\
+	NOTICE\
+	README\
+	Makefile\
+	`{9 ls -p $PLAN9/src/lib9/fmt/*.c}\
+	fmt.h\
+	fmtdef.h\
+	nan.h\
+	plan9.h\
+	fmtinstall.3\
+	print.3\
+
+WHAT=fmt
+
+<../mkfile.what
+
+%: $PLAN9/src/lib9/fmt/%
+	cp $prereq $target
+
