@@ -1,0 +1,25 @@
+<$PLAN9/src/mkhdr
+
+LIBFILES=\
+	error\
+	file\
+	fs\
+	pack\
+
+LIB=${LIBFILES:%=%.$O} $PLAN9/lib/libventi.a
+
+HFILES=\
+	$PLAN9/include/venti.h\
+	stdinc.h\
+	error.h\
+	vac.h\
+	dat.h\
+	fns.h\
+
+TARG=vac vacfs # vtdump
+
+default:V: all
+
+test:V: $O.srcload $O.wtest $O.rtest $O.vtdump $O.vtread
+
+<$PLAN9/src/mkmany
