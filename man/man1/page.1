@@ -1,0 +1,74 @@
+.TH PAGE 1
+.SH NAME
+img, psv \- view 
+FAX, 
+image, graphic, PostScript, PDF, and
+typesetter output
+files
+.SH SYNOPSIS
+.B page
+[
+.IR file ...
+]
+.PP
+.B img
+.I file.bit
+.PP
+.B psv
+.I file.ps
+.PP
+.B psv
+.I file.pdf
+.SH DESCRIPTION
+Plan 9's
+.IR page (1)
+is not ported.
+Instead, 
+.I page
+is a script that invokes
+.IR qiv (1)
+to view graphic files
+or
+.I psv
+to view PostScript and PDF.
+On Mac OS X,
+.I page
+invokes Preview to handle all files.
+.PP
+.I Img
+is a simple image viewer for Plan 9 images
+(see
+.IR image (7)).
+.PP
+.I Psv
+is a PostScript and PDF viewer.
+It is a streamlined interface to
+.IR gv (1).
+.PP
+To view troff output, use
+.IR proof (1).
+.SH "SEE ALSO
+.IR gs (1),
+.IR gv (1),
+.IR jpg (1),
+.IR proof (1),
+.IR tex (1),
+.IR troff (1)
+.SH SOURCE
+.B \*9/src/cmd/draw/img.c
+.br
+.B \*9/bin/psv
+.SH BUGS
+When using Preview on Mac OS X,
+.I page
+leaves temporary files in
+.BR /var/tmp ,
+since it has no way to know when the viewer has exited.
+.PP
+.I Page
+does not handle
+Plan 9 
+.IR image (7)
+files; use
+.I img
+explicitly.
