@@ -38,6 +38,14 @@ echo "+ Mailing list: http://groups.google.com/group/plan9port-dev"
 echo "+ Issue tracker: http://code.swtch.com/plan9port/issues/"
 echo "+ Submitting changes: http://swtch.com/go/codereview"
 echo " "
+echo "SORRY, WE'VE MOVED."
+echo " "
+echo "Plan 9 from User Space is now using Git."
+echo "See http://swtch.com/plan9port/ for a new tar file"
+echo "or http://swtch.com/plan9port/man/man1/git.html for Git instructions."
+echo " "
+exit 1
+
 echo "* Resetting $PLAN9/config"
 rm -f config
 
